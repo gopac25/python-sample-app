@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: mlops-flask-container
-        image: prakasarul222/mlops:latest
+        image: prakasarul222/mlops:tag
         imagePullPolicy: Always
         ports:
         - containerPort: 5000
