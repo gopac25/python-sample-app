@@ -5,7 +5,7 @@ from flask import Flask, request
 app = Flask(__name__)
 
 
-model_pickle = open("./artefacts/classifier.pkl", "rb")
+model_pickle = open("./classifier.pkl", "rb")
 clf = pickle.load(model_pickle)
 
 

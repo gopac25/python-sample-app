@@ -1,0 +1,21 @@
+pipeline{
+    agent any 
+    environment{
+        Newversion = "1.2.4"
+    }
+    stages{
+        stage("Build"){
+            steps{
+                echo "Hello calling environment ${Newversion}"
+            }
+        }
+        stage("login stpes"){
+            steps{
+                withCredentials([usernamePassword(credentialsId: 'local_admin', usernameVariable : 'username',passwordVariable: 'password')]) {
+                sh 'ssh ${password} ${username}@172.31.24.127'
+                }
+                echo "Hello calling environment ${Newversion}"
+            }
+        }
+    }
+}

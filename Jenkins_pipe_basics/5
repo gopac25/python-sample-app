@@ -1,0 +1,21 @@
+pipeline{
+    agent {
+        node {label 'worker1' }
+    }
+
+    stages{
+        stage("Build"){
+            steps{
+                echo "on woker1 build"
+            }
+        }
+        stage("login stpes"){
+            steps{
+                
+                sh 'hostname'
+                sh 'echo "`ip a"'
+            
+            }
+        }
+    }
+}

@@ -1,0 +1,18 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Deploy') {
+            input {
+                message "Ready for deployment"
+                ok "yes"
+
+            }
+            steps {
+                echo 'Hello World'
+                sh 'echo "This is using input parameter" >inputfile.txt'
+                sh 'cat inputfile.txt'
+            }
+        }
+    }
+}
