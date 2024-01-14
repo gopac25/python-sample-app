@@ -33,24 +33,22 @@ pipeline{
                         }
             }
         }
-        stage ('K8S Deploy') {
+        stage ('Update Build number') {
         steps {
             script {
-                sh 'sed -i "s/tag/${BUILD_NUMBER}/" aks_deployment.yml'
-            //     kubernetesDeploy(
-            //         configs: 'aks_deployment.yml',
-            //         kubeconfigId: 'kubeconfig',
-            //         enableConfigSubstitution: true
-            //         )           
-               
+                sh 'sed -i "s/tag/${BUILD_NUMBER}/" aks_deployment.yml'              
             }
-           agent {
+           
+        }
+    }
+        stage ("K8 upload") {
+            agent {
             kubernetes {
             yamlFile 'aks_deployment.yml'
             retries 2
             }
            }
+
         }
-    }
      }
 }
