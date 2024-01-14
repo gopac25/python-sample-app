@@ -5,7 +5,6 @@ WORKDIR /flask-docker
 RUN python -m pip install --upgrade pip
 COPY requirements.txt requirements.txt
 RUN pip install -r requirements.txt
-ADD artefacts .
-COPY app.py .
+COPY . .
 
 CMD ["python3", "-m", "flask", "run", "--host=0.0.0.0"]
