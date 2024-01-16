@@ -37,8 +37,7 @@ pipeline{
         steps {
         script {
         kubeconfig(credentialsId: 'kubeconfig', serverUrl: '') {
-        sh 'sed -i "s/tag/${BUILD_NUMBER}/" aks_deployment.yml'
-        sh ('kubectl apply -f aks_deployment.yml')
+        sh ('sed -i "s/tag/${BUILD_NUMBER}/" aks_deployment.yml ; kubectl apply -f aks_deployment.yml')
         }
         }
         }
