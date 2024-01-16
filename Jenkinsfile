@@ -36,6 +36,7 @@ pipeline{
         stage ('K8S Deploy') {
         steps {
         script {
+        sh 'sed -i "s/tag/${BUILD_NUMBER}/" aks_deployment.yml'
         kubeconfig(credentialsId: 'kubeconfig', serverUrl: '') {
         sh ('kubectl apply -f aks_deployment.yml')
         }
