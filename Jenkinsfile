@@ -35,7 +35,9 @@ pipeline{
         }
         stage('update build number') {
             steps {
+                script{
                   sh 'sed -i "s/tag/${BUILD_NUMBER}/" aks_deployment.yml'
+                }
             }
         }
 
