@@ -1,5 +1,5 @@
 pipeline{
-    agent any
+    agent {label "master"}
     environment {
         //once you sign up for Docker hub, use that user_id here
         registry = "prakasarul222/mlops"
@@ -33,22 +33,14 @@ pipeline{
                         }
             }
         }
-        stage ('Update Build number') {
+        stage ('K8S Deploy') {
         steps {
-            script {
-                sh 'sed -i "s/tag/${BUILD_NUMBER}/" aks_deployment.yml'              
-            }
-           
+        script {
+        kubeconfig(credentialsId: 'kubeconfig', serverUrl: '') {
+        sh ('kubectl apply -f aks_deployment.yml')
         }
-    }
-        stage ("K8 upload") {
-            agent {
-            kubernetes {
-            yamlFile 'aks_deployment.yml'
-            retries 2
-            }
-           }
-
+        }
         }
      }
+}
 }
